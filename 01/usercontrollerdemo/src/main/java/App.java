@@ -16,7 +16,7 @@ public class App {
 		List<Validator> validators = new ArrayList<Validator>();
 		validators.add(new SpaceValidator());
 		validators.add(new LengthValidator());
-		UserController controller = new UserController(repository, validators);
+		UserController controller = new UserController();
 		controller.save(new User("Lacoka", "GGZ56", true));
 		controller.save(new User("Bazsika", "GoZ56", true));
 		controller.save(new User("Ferike", "GGp56", true));

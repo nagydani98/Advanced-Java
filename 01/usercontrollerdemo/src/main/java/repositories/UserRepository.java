@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.User;
+import data.UserModify;
 
-public class UserRepository {
+public class UserRepository implements UserModify{
 	
 	private List<User> userList = new ArrayList<User>();
 	public void save(User user) {
