@@ -3,16 +3,22 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import data.User;
 import repositories.UserRepository;
+import validators.Validator;
 
 public class UserController {
 	
 	UserRepository repository = new UserRepository();
+	List<Validator> validators = new ArrayList<Validator>();
 	public void save(User user) {
 		if(!user.getName().contains(" ") && user.getName().length() > 5) {
 			
-			repository.save(user);
+			if(isValid(user)) {
+				repository.save(user);
+			}
+			
 			
 		}
 		else {
@@ -20,5 +26,15 @@ public class UserController {
 		}
 		
 		
+	}
+	
+	private boolean isValid(User user) {
+		boolean isValid = true;
+		for (Validator validator : validators) {
+			if(!validator.isValid(user)) {
+				isValid = false;
+			}
+		}
+		return isValid;
 	}
 }
