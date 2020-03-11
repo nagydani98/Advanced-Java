@@ -68,7 +68,7 @@ public class ConsoleReader {
 	}
 	
 	//will read a line and check if it's below or equal to the required maximum length
-	public static String readStringWithLength(int maxLength) {
+	public static String readStringWithMaxLength(int maxLength) {
 		String returnValue = "";
 		boolean ok = false;
 		
@@ -80,6 +80,25 @@ public class ConsoleReader {
 			}
 			else {
 				System.out.println("Input is longer than what is required");
+			}
+				
+		} while (!ok);
+		
+		return returnValue;
+	}
+	
+	public static String readStringWithMinLength(int minLength) {
+		String returnValue = "";
+		boolean ok = false;
+		
+		do {
+			returnValue = readString();
+			
+			if(returnValue.length() >= minLength) {
+				ok = true;
+			}
+			else {
+				System.out.println("Input is shorter than what is required");
 			}
 				
 		} while (!ok);

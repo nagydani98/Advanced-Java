@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.User;
+import repositories.UserRepository;
 
 public class UserController {
-	List<User> userList = new ArrayList<User>();
 	
-	public void registerUser(String name) {
-		if(!name.contains(" ")) {
-			User user = new User(name);
-			userList.add(user);
+	UserRepository repository = new UserRepository();
+	public void save(User user) {
+		if(!user.getName().contains(" ") && user.getName().length() > 5) {
 			
-			System.out.println("Registered " + user);
+			repository.save(user);
+			
 		}
 		else {
 			System.err.println("Error, username cannot contain spaces!");
