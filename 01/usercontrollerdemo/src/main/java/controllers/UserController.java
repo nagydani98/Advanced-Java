@@ -10,8 +10,16 @@ import validators.Validator;
 
 public class UserController {
 	
-	UserRepository repository = new UserRepository();
-	List<Validator> validators = new ArrayList<Validator>();
+	UserRepository repository;
+	List<Validator> validators;
+	
+	
+	public UserController(UserRepository repository, List<Validator> validators) {
+		super();
+		this.repository = repository;
+		this.validators = validators;
+	}
+
 	public void save(User user) {
 		if(!user.getName().contains(" ") && user.getName().length() > 5) {
 			
