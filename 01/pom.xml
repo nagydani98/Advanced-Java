@@ -14,6 +14,7 @@
       <module>tanulo-vasarlas</module>
       <module>valogato-interface</module>
       <module>bolygok</module>
+      <module>usercontroller</module>
    </modules>
    <dependencies>
    	<dependency>
