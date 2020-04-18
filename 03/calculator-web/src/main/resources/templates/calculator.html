@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/" method="post" th:object="${calc}">
+<input type="number" th:field="*{leftOperand}" th:class="${#fields.hasErrors('leftOperand')} ? fieldError">
+    <select class="form-control" name="operator">
+                    <option value="+" th:selected="${calc.operator}">+</option>
+                    <option value="-" th:selected="${calc.operator}">-</option>
+                    <option value="*" th:selected="${calc.operator}">*</option>
+                    <option value="/" th:selected="${calc.operator}">/</option>
+    </select>
+    
+    <input type="number" th:field="*{rightOperand}" th:class="${#fields.hasErrors('rightOperand')} ? fieldError">
+    <button type="submit" name="action" value="calc">=</button>
+</form>
+</body>
+</html>
