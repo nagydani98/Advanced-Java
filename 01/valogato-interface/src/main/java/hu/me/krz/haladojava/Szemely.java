@@ -3,7 +3,7 @@ package hu.me.krz.haladojava;
 import lombok.Data;
 
 @Data
-public abstract class Szemely implements IValogato{
+public abstract class Szemely{
 	private String name;
 	private int age;
 	

@@ -12,7 +12,7 @@ public class Proba {
 		int param = 0;
 		try {
 			param = Integer.parseInt(args[0]);
-			Szemely[] skacok = new Diak[param];
+			IValogato[] skacok = new Diak[param];
 			for (int i = 0; i < skacok.length; i++) {
 				skacok[i] = new Diak("skac", genNumBetween(10, 20), genNumBetween(0, 10));
 				
