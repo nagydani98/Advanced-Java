@@ -11,5 +11,6 @@
 
    <modules>
       <module>01</module>
+      <module>03</module>
    </modules>
 </project>
