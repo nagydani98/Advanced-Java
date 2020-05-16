@@ -1,4 +1,4 @@
-package hu.me.krz.haladojava.newsletter.mailservice;
+package hu.me.krz.haladojava.newsletter.service;
 
 public interface EmailService {
     void sendSimpleMessage(String to,
