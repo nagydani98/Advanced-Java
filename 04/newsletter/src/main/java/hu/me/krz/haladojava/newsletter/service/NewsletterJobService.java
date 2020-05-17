@@ -34,6 +34,11 @@ public class NewsletterJobService implements NewsletterService, EmailService{
 
     }
     
+    public void initServiceWithData(Collection<String> mailList, String newsLetterText) {
+    	this.subscriberList = mailList;
+    	this.newsLetter = newsLetterText;
+    }
+    
     @Autowired
     public JavaMailSender emailSender;
 	
