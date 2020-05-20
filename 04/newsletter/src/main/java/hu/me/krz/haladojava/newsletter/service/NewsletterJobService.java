@@ -14,7 +14,7 @@ import lombok.Setter;
 import java.util.Collection;
 
 @Service
-public class NewsletterJobService implements NewsletterService, EmailService{
+public class NewsletterJobService implements NewsletterSenderService, EmailService{
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     
@@ -28,15 +28,16 @@ public class NewsletterJobService implements NewsletterService, EmailService{
     
     public void executeNewsletterJob() {
 
-        logger.info("Sending newsletters has begun...");
-        sendNewsletter(subscriberList, newsLetter);
-        logger.info("Sending newsletters has finished...");
+    	if(!(subscriberList.isEmpty() && newsLetter.isEmpty())) {
+    		logger.info("Sending newsletters has begun...");
+            sendNewsletter(subscriberList, newsLetter);
+            logger.info("Sending newsletters has finished...");
 
-    }
-    
-    public void initServiceWithData(Collection<String> mailList, String newsLetterText) {
-    	this.subscriberList = mailList;
-    	this.newsLetter = newsLetterText;
+    	}
+    	else {
+    		logger.error("Sending newsletter failed, subscriber list or newsletter might be empty. SubscriberList length: "
+    				+ subscriberList.size() + " newsLetter length: " + newsLetter.length());
+    	}
     }
     
     @Autowired

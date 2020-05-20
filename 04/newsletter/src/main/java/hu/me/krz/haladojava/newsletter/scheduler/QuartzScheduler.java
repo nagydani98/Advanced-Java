@@ -73,20 +73,21 @@ public class QuartzScheduler {
 	    @Bean
 	    public JobDetail jobDetail() {
 
-	        return newJob().ofType(NewsLetterJob.class).storeDurably().withIdentity(JobKey.jobKey("Qrtz_Job_Detail")).withDescription("Invoke Sample Job service...").build();
+	        return newJob().ofType(NewsLetterJob.class).storeDurably().withIdentity(JobKey.jobKey("Qrtz_Job_Detail")).withDescription("Invoke Job service...").build();
 	    }
 
 	    @Bean
 	    public Trigger trigger(JobDetail job) {
 
-	        int frequencyInSec = 10;
-	        logger.info("Configuring trigger to fire every {} seconds", frequencyInSec);
-
 	        return newTrigger().
 	        		forJob(job).
 	        		withIdentity(TriggerKey.triggerKey("Qrtz_Trigger")).
 	        		withDescription("Newsletter trigger").
-	        		withSchedule(CronScheduleBuilder.cronSchedule("0 0 10 ? * 1,3,6")).build();
+	        		withSchedule(
+	        				//CronScheduleBuilder.cronSchedule("0 5 13 ? * 4")
+	        				CronScheduleBuilder.cronSchedule("0 0 10 ? * 2,4,7")
+	        				//simpleSchedule().withIntervalInSeconds(2)
+	        				).build();
 	    }
 	
 }
