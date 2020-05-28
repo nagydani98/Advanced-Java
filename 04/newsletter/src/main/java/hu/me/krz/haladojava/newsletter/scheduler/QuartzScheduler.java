@@ -17,6 +17,7 @@ import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,9 @@ public class QuartzScheduler {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
     private ApplicationContext applicationContext;
+	
+	@Value("${hu.me.krz.haladojava.cronschedule}")
+	private String cronScheduleExpression;
 	
 	@Bean
     public SpringBeanJobFactory springBeanJobFactory() {
@@ -78,16 +82,13 @@ public class QuartzScheduler {
 
 	    @Bean
 	    public Trigger trigger(JobDetail job) {
-
+	    	logger.info("My cron schedule: " + cronScheduleExpression);
 	        return newTrigger().
 	        		forJob(job).
 	        		withIdentity(TriggerKey.triggerKey("Qrtz_Trigger")).
 	        		withDescription("Newsletter trigger").
-	        		withSchedule(
-	        				//CronScheduleBuilder.cronSchedule("0 5 13 ? * 4")
-	        				CronScheduleBuilder.cronSchedule("0 0 10 ? * 2,4,7")
-	        				//simpleSchedule().withIntervalInSeconds(2)
-	        				).build();
+	        		withSchedule(CronScheduleBuilder.cronSchedule(cronScheduleExpression)).
+	        		build();
 	    }
 	
 }

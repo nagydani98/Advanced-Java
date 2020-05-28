@@ -1,32 +1,19 @@
 package hu.me.krz.haladojava.newsletter.controller;
 
-import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import hu.me.krz.haladojava.newsletter.service.NewsletterJobService;
-import hu.me.krz.haladojava.newsletter.service.SimulatedNewsLetterService;
-import hu.me.krz.haladojava.newsletter.service.SimulatedUserService;
+import hu.me.krz.haladojava.newsletter.service.NewsletterSenderService;
 
-@Controller
+@RestController
 public class NewsLetterSendingController {
 
 	@Autowired
-	private NewsletterJobService newsletterJobService;
+	private NewsletterSenderService newsletterJobService;
 	
-	@Autowired
-	private SimulatedNewsLetterService newsLetterService;
-	
-	@Autowired
-	private SimulatedUserService userService;
-	
-	@PostConstruct
-	private void initNewsLetterJobService(){
-		newsletterJobService.setNewsLetter(newsLetterService.getNewsLetterToSend());
-		newsletterJobService.setSubscriberList(userService.getUserList().stream().
-				map(user -> user.getEmail()).collect(Collectors.toList()));
+	@GetMapping("/sendNewsletters")
+	public void sendNewsletter() {
+		newsletterJobService.sendNewsletter();
 	}
 }

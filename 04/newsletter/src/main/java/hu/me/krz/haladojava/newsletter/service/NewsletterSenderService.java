@@ -4,4 +4,6 @@ import java.util.Collection;
 
 public interface NewsletterSenderService {
 		public void sendNewsletter(Collection<String> addresses, String letterText);
+		public void sendNewsletter();
+		public void initService();
 }
