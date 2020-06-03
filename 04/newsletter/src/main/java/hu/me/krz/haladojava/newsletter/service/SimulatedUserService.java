@@ -6,4 +6,5 @@ import hu.me.krz.haladojava.newsletter.data.User;
 
 public interface SimulatedUserService {
 	public List<User> getUserList();
+	public void removeSuccessfulAddresses(List<String> emailAddresses);
 }

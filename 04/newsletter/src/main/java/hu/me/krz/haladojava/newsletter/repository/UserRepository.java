@@ -6,4 +6,5 @@ import hu.me.krz.haladojava.newsletter.data.User;
 
 public interface UserRepository {
 	public List<User> getUsers();
+	public void remove(User user);
 }

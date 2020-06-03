@@ -1,6 +1,7 @@
 package hu.me.krz.haladojava.newsletter.servicetests;
 
-import static org.junit.Assert.assertNotNull;
+
+
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;

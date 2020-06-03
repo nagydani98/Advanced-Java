@@ -19,7 +19,9 @@ import javax.mail.internet.MimeMessage;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
+import org.mockito.Captor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -64,6 +66,9 @@ public class NewsLetterSenderServiceImplTest {
 	private final static String TEST_SUBJECT = "Test subject";
 	private final static String TEST_LETTERTEXT = "Test example content of a newsletter";
 	
+	@Captor
+	private ArgumentCaptor<SimpleMailMessage> simpleMsgCaptor;
+	
 	@Before
 	public void setupMockServiceReturns() {
 		when(simulatedUserServiceImpl.getUserList()).
@@ -87,7 +92,8 @@ public class NewsLetterSenderServiceImplTest {
         message.setTo(TEST_ADDRESS);
         message.setSubject(TEST_SUBJECT);
         message.setText(TEST_LETTERTEXT);
-		verify(mailSender, times(1)).send(message);
+		verify(mailSender, times(1)).send(simpleMsgCaptor.capture());
+		assertTrue(message.equals(simpleMsgCaptor.getValue()));
 	}
 	
 	@Test
@@ -125,7 +131,8 @@ public class NewsLetterSenderServiceImplTest {
         message.setTo(TEST_ADDRESS);
         message.setSubject("Newsletter");
         message.setText(TEST_LETTERTEXT);
-		verify(mailSender, times(3)).send(message);
+		verify(mailSender, times(3)).send(simpleMsgCaptor.capture());
+		assertTrue(message.equals(simpleMsgCaptor.getValue()));
 	}
 	
 	@Test
@@ -137,7 +144,8 @@ public class NewsLetterSenderServiceImplTest {
         message.setSubject("Newsletter");
         message.setText(simulatedNewsLetterServiceImpl.getNewsLetterToSend());
 		
-		verify(mailSender, times(1)).send(message);
+		verify(mailSender, times(1)).send(simpleMsgCaptor.capture());
+		assertTrue(message.equals(simpleMsgCaptor.getValue()));
 	}
 	
 	

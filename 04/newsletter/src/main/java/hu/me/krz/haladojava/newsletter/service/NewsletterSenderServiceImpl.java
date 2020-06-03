@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -48,14 +49,18 @@ public class NewsletterSenderServiceImpl implements NewsletterSenderService, Ema
     		
             logger.info("Sending newsletters has finished.");
             
+            
             if(failedAddresses.size() > 0) {
             	String errorMessage = "Letter was failed to be delivered to these addresses: ";
             	for (String address : failedAddresses) {
             		errorMessage+= "\n" + address;
 				}
-            	//subscriberList.stream().forEach(x -> errorMessage+= "\n" + x);
+            	
             	logger.error(errorMessage);	
             }
+            
+            logger.info("Removing successful addresses.");
+            userService.removeSuccessfulAddresses((List<String>) successfulAddresses);
 
     	}
     	else {

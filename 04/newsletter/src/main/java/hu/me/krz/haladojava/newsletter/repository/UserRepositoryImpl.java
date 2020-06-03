@@ -11,14 +11,21 @@ import hu.me.krz.haladojava.newsletter.data.User;
 public class UserRepositoryImpl implements UserRepository {
 
 	private List<User> userList = new ArrayList<User>();
-	@Override
-	public List<User> getUsers() {
-		// TODO Auto-generated method stub
+	
+	public UserRepositoryImpl() {
 		for (int i = 0; i < 3; i++) {
 			userList.add(new User(i + 1, "Guy " + i, "testthingsdani@gmail.com"));
-		}	
-		userList.add(new User(4, "Guy 4", "invalid"));
+		}
+	}
+	
+	@Override
+	public List<User> getUsers() {
 		return userList;
+	}
+
+	@Override
+	public void remove(User user) {
+		userList.remove(user);
 	}
 
 }
